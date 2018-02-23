@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>cube</title>
+  <script src="js/aframe-v0.7.1.js"></script>
+  <script src="js/aframe-animation-component.js"></script>
+  <script src="js/aframe-event-set-component.js"></script>
+  <script src="js/aframe-sun-sky.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
+      <img id="p1" alt="scene0" src="assets/cube1.png">
+      <img id="p2" alt="scene1" src="assets/cube2.png">
+      <img id="p3" alt="scene2" src="assets/cube3.png">
+      <img id="p4" alt="scene3" src="assets/cube4.png">
+      <img id="p5" alt="scene4" src="assets/cube5.png">
+      <img id="p6" alt="scene5" src="assets/cube6.png">
+    </a-assets>
+
+    <a-sun-sky></a-sun-sky>
+
+    <a-box id="cube" color="#000000" position="-3 2 -7" rotation="5 -6 0" width="4" height="4" depth="4">
+      <a-plane position="0 0 2.1" width="3.8" height="3.8" src="#p1"></a-plane> <!-- front -->
+      <a-plane position="0 0 -2.1" rotation="0 180 180" width="3.8" height="3.8" src="#p3"></a-plane> <!-- back -->
+      <a-plane position="-2.1 0 0" rotation="0 -90 0" width="3.8" height="3.8" src="#p2"></a-plane> <!-- left -->
+      <a-plane position="2.1 0 0" rotation="0 90 0" width="3.8" height="3.8" src="#p4"></a-plane> <!-- right -->
+      <a-plane position="0 2.1 0" rotation="-90 0 0" width="3.8" height="3.8" src="#p5"></a-plane> <!-- top -->
+      <a-plane position="0 -2.1" rotation="90 0 0" width="3.8" height="3.8" src="#p6"></a-plane> <!-- bottom -->
+    </a-box>
+
+    <!-- controller -->
+    <a-entity position="1 0.5 -2" rotation="0 -2 0" id="player">
+      <a-box id="up" class="clickable" position="0 2 -5" color="#EEFFE3" rotation="0 -24 0" width="0.5" height="0.8" depth="0.5"></a-box> <!-- up -->
+      <a-box id="down" class="clickable" position="0 0.4 -5" color="#EEFFE3" rotation="0 -24 180" width="0.5" height="0.8" depth="0.5"></a-box> <!-- down -->
+      <a-box id="left" class="clickable" position="-0.8 1.2 -5" color="#EEFFE3" rotation="0 -24 270" width="0.5" height="0.8" depth="0.5"></a-box> <!-- left -->
+      <a-box id="right" class="clickable" position="0.8 1.2 -5" color="#EEFFE3" rotation="0 -24 90" width="0.5" height="0.8" depth="0.5"></a-box> <!-- right -->
+    </a-entity>
+
+    <!-- second (colored) cube -->
+    <a-box color="#000000" position="-21 2 -70" rotation="5 -6 0" width="4" height="4" depth="4">
+      <a-plane position="0 0 2.1" width="3.8" height="3.8" color="#ff0000"></a-plane> <!-- front red -->
+      <a-plane position="0 0 -2.1" rotation="0 180 180" width="3.8" height="3.8" color="#00ff00"></a-plane> <!-- back green -->
+      <a-plane position="-2.1 0 0" rotation="0 -90 0" width="3.8" height="3.8" color="#00ffff"></a-plane> <!-- left cyan  -->
+      <a-plane position="2.1 0 0" rotation="0 90 0" width="3.8" height="3.8" color="#ff00ff"></a-plane> <!-- right magents -->
+      <a-plane position="0 2.1 0" rotation="-90 0 0" width="3.8" height="3.8" color="#ffff00"></a-plane> <!-- top yellow -->
+      <a-plane position="0 -2.1" rotation="90 0 0" width="3.8" height="3.8" color="#0000ff"></a-plane> <!-- bottom blue -->
+    </a-box>
+
+    <a-entity position="0 0 0" id="player">
+      <a-camera>
+        <a-entity id="cursor" cursor="fuseTimeout: 1500"
+        raycaster="objects: .clickable"
+        position="0 0 -1"
+        geometry="primitive: ring; radiusOuter: 0.03; radiusInner: 0.02;"
+        material="color: red; shader: flat"
+        event-set__1="_event: mouseenter; material.color: limegreen"
+        event-set__2="_event: mouseleave; material.color: red"
+        animation__click="property: scale; startEvents: click; dur: 200; from: 0.2 0.2 0.2; to: 1 1 1; easing: easeInQuad"
+        animation__fuse="property: scale; startEvents: fusing; dur: 1500; from: 1 1 1; to: 0.2 0.2 0.2; easing: easeInQuad"
+        >
+        </a-entity>
+      </a-camera>
+    </a-entity>
+  </a-scene>
+  <script>
+  // ES5 for older phone browseers
+  var scene = document.querySelector('a-scene');
+
+  if (scene.hasLoaded === true) {
+    run();
+  } else {
+  scene.addEventListener('loaded', run);
+  }
+
+  function run() {
+    var up = document.querySelector('#up');
+    var down = document.querySelector('#down');
+    var left = document.querySelector('#left');
+    var right = document.querySelector('#right');
+    var cube = document.querySelector('#cube');
+
+    up.addEventListener('click', function () {
+      var rot = parseInt(cube.getAttribute('rotation').x);
+      var target = rot - 90;
+      cube.setAttribute('animation__up', `property: rotation; dur: 200; easing: easeInSine; from: ${rot} 0 0; to: ${target} 0 0; startEvents: up;`);
+      cube.emit('up');
+    });
+    down.addEventListener('click', function () {
+      var rot = parseInt(cube.getAttribute('rotation').x);
+      var target = rot + 90;
+      cube.setAttribute('animation__down', `property: rotation; dur: 200; easing: easeInSine; from: ${rot} 0 0; to: ${target} 0 0; startEvents: down;`);
+      cube.emit('down');
+    });
+    left.addEventListener('click', function () {
+      var rot = parseInt(cube.getAttribute('rotation').y);
+      var target = rot - 90;
+      cube.setAttribute('animation__left', `property: rotation; dur: 200; easing: easeInSine; from: 0 ${rot} 0; to: 0 ${target} 0; startEvents: left;`);
+      cube.emit('left');
+    });
+    right.addEventListener('click', function () {
+      var rot = parseInt(cube.getAttribute('rotation').y);
+      var target = rot + 90;
+      cube.setAttribute('animation__right', `property: rotation; dur: 200; easing: easeInSine; from: 0 ${rot} 0; to: 0 ${target} 0; startEvents: right;`);
+      cube.emit('right');
+    });
+  }
+  </script>
+</body>
+</html>
