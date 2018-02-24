@@ -11,17 +11,17 @@
 <body>
   <a-scene>
     <a-assets>
-      <img id="p1" alt="scene0" src="assets/cube1.png">
-      <img id="p2" alt="scene1" src="assets/cube2.png">
-      <img id="p3" alt="scene2" src="assets/cube3.png">
-      <img id="p4" alt="scene3" src="assets/cube4.png">
-      <img id="p5" alt="scene4" src="assets/cube5.png">
-      <img id="p6" alt="scene5" src="assets/cube6.png">
+      <img id="p1" src="assets/cube1.png">
+      <img id="p2" src="assets/cube2.png">
+      <img id="p3" src="assets/cube3.png">
+      <img id="p4" src="assets/cube4.png">
+      <img id="p5" src="assets/cube5.png">
+      <img id="p6" src="assets/cube6.png">
     </a-assets>
 
     <a-sun-sky></a-sun-sky>
 
-    <a-box id="cube" color="#000000" position="-3 2 -7" rotation="5 -6 0" width="4" height="4" depth="4">
+    <a-box id="cube" color="#000000" position="-5 2 -7" rotation="5 6 0" width="4" height="4" depth="4">
       <a-plane position="0 0 2.1" width="3.8" height="3.8" src="#p1"></a-plane> <!-- front -->
       <a-plane position="0 0 -2.1" rotation="0 180 180" width="3.8" height="3.8" src="#p3"></a-plane> <!-- back -->
       <a-plane position="-2.1 0 0" rotation="0 -90 0" width="3.8" height="3.8" src="#p2"></a-plane> <!-- left -->
@@ -31,15 +31,15 @@
     </a-box>
 
     <!-- controller -->
-    <a-entity position="1 0.5 -2" rotation="0 -2 0" id="player">
-      <a-box id="up" class="clickable" position="0 2 -5" color="#EEFFE3" rotation="0 -24 0" width="0.5" height="0.8" depth="0.5"></a-box> <!-- up -->
-      <a-box id="down" class="clickable" position="0 0.4 -5" color="#EEFFE3" rotation="0 -24 180" width="0.5" height="0.8" depth="0.5"></a-box> <!-- down -->
-      <a-box id="left" class="clickable" position="-0.8 1.2 -5" color="#EEFFE3" rotation="0 -24 270" width="0.5" height="0.8" depth="0.5"></a-box> <!-- left -->
-      <a-box id="right" class="clickable" position="0.8 1.2 -5" color="#EEFFE3" rotation="0 -24 90" width="0.5" height="0.8" depth="0.5"></a-box> <!-- right -->
+    <a-entity position="-1 0.5 -2" rotation="0 0 0">
+      <a-box id="up" class="clickable" position="0 2 -5" color="#EEFFE3" rotation="0 0 0" width="0.5" height="0.8" depth="0.5"></a-box> <!-- up -->
+      <a-box id="down" class="clickable" position="0 0.4 -5" color="#EEFFE3" rotation="0 0 180" width="0.5" height="0.8" depth="0.5"></a-box> <!-- down -->
+      <a-box id="left" class="clickable" position="-0.8 1.2 -5" color="#EEFFE3" rotation="0 0 270" width="0.5" height="0.8" depth="0.5"></a-box> <!-- left -->
+      <a-box id="right" class="clickable" position="0.8 1.2 -5" color="#EEFFE3" rotation="0 0 90" width="0.5" height="0.8" depth="0.5"></a-box> <!-- right -->
     </a-entity>
 
     <!-- second (colored) cube -->
-    <a-box color="#000000" position="-21 2 -70" rotation="5 -6 0" width="4" height="4" depth="4">
+    <a-box color="#000000" position="-31 2 -70" rotation="5 -6 0" width="4" height="4" depth="4">
       <a-plane position="0 0 2.1" width="3.8" height="3.8" color="#ff0000"></a-plane> <!-- front red -->
       <a-plane position="0 0 -2.1" rotation="0 180 180" width="3.8" height="3.8" color="#00ff00"></a-plane> <!-- back green -->
       <a-plane position="-2.1 0 0" rotation="0 -90 0" width="3.8" height="3.8" color="#00ffff"></a-plane> <!-- left cyan  -->
@@ -71,7 +71,7 @@
   if (scene.hasLoaded === true) {
     run();
   } else {
-  scene.addEventListener('loaded', run);
+    scene.addEventListener('loaded', run);
   }
 
   function run() {
