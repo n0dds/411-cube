@@ -16,6 +16,7 @@
       <img id="p4" src="assets/01/cube4.png"> <!-- left -->
       <img id="p5" src="assets/01/cube5.png"> <!-- top -->
       <img id="p6" src="assets/01/cube6.png"> <!-- bottom -->
+      <a-asset-item id="mod_chicken" src="assets/chick-lowpoly.dae"></a-asset-item>
     </a-assets>
 
     <a-sun-sky></a-sun-sky>
@@ -26,6 +27,14 @@
     <a-plane id='cube4' position="-30 0 0" rotation="0 90 0" width="58" height="58" src="#p4"></a-plane> <!-- left -->
     <a-plane id='cube5' position="0 30 0" rotation="90 0 0" width="58" height="58" src="#p5"></a-plane> <!-- top -->
     <a-plane id='cube6' position="0 -30 0" rotation="-90 0 0" width="58" height="58" src="#p6"></a-plane> <!-- bottom -->
+    <!-- 'hide' a chicken in the scene
+    3d model by platyperson, sketchfab.com [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+    -->
+    <a-entity id="chicken" scale="0.2 0.2 0.2" position="0 -3 -36" rotation="0 30 0" collada-model="#mod_chicken"></a-entity>
+    <a-entity position="1 -2 -34.5">
+      <a-cylinder position="0 -0.3 0" radius="0.1" height="3" color="black"></a-cylinder>
+      <a-plane position="0 2 0" width="3" height="2" color="white" text="value: submit\nyour\nfiles; color: black; align: center"></a-plane>
+    </a-entity>
 
     <a-entity position="0 0 0" id="player">
       <a-camera></a-camera>
