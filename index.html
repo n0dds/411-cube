@@ -22,8 +22,8 @@
 
     <a-sun-sky></a-sun-sky>
 
-    <a-plane id='cube1' position="0 0 0" rotation="0 0 0" width="60" height="60" src="#p1"></a-plane> <!-- front -->
-    <a-plane id='karate' position="0 10 -20" rotation="0 90 0" width="10" height="20" src="#p7"  alpha-test></a-plane> <!-- front -->
+    <a-plane id='cube1' position="0 0 -30" rotation="0 0 0" width="60" height="60" src="#p1"></a-plane> <!-- front -->
+    <a-plane id='karate' position="0 0 -5" rotation="0 0 0" width="4" height="8" src="#p7"  alpha-test></a-plane> <!-- front -->
     <a-plane id='cube2' position="30 0 0" rotation="0 -90 0" width="60" height="60" src="#p2"></a-plane> <!-- right -->
     <a-plane id='cube3' position="0 0 30" rotation="0 180 0" width="60" height="60" src="#p3"></a-plane> <!-- back -->
     <a-plane id='cube4' position="-30 0 0" rotation="0 90 0" width="60" height="60" src="#p4"></a-plane> <!-- left -->
@@ -41,6 +41,8 @@
     <a-entity position="0 0 0" id="player">
       <a-camera></a-camera>
     </a-entity>
+    <!-- <a-entity light="type: ambient; color: #FFF"></a-entity> -->
+<a-entity light="type: ambient; color: #FFF; intensity: 1.2 " position="1 1 1"></a-entity>
   </a-scene>
   <!-- <script src="js/app.js"></script> -->
   <script>
